@@ -1,0 +1,59 @@
+<div>
+<nav class="navbar navbar-dark bg-dark">
+  <h1 style="color: cornsilk; font-weight: bold; margin-left: 10px; font-size: 30px;">Time Tracker</h1>
+  
+  <p style="color: cornsilk; margin-right: 30px; font-weight: bold; font-size: 20px;">{{myDate | date}}</p>
+  <mat-form-field appearance="fill" style="color: cornsilk; background-color: darkgray; margin-right: 20px;">
+  <mat-label>Input & change events</mat-label>
+  <input matInput [matDatepicker]="picker"
+         (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+  
+</nav>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+<div class="container mt-5">
+
+    <div class="d-flex flex-row-reverse bd-highlight">
+      <button class="btn btn-primary" routerLink="/add">Add Project</button>
+    </div>
+  
+    <h2 class="mb-3 text-center">Projects Collection</h2>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Actions</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of Projects">
+          <td>{{project.id}}</td>
+          <td>{{project.projectname}}</td>
+          <td>
+            <span class="edit btn-danger btn-sm btn" (click)="delete(project.id)">Delete</span> &nbsp;
+            <span class="edit btn-success btn-sm btn" routerLink="/edit/{{project.id}}">Edit</span>
+            
+            <app-timer></app-timer>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
+  </div>
+  
+      <div class="col-sm" >
+        <div class="example-events">
+          <div *ngFor="let e of events">{{e}}</div>
+        </div>
+        
+      </div>
